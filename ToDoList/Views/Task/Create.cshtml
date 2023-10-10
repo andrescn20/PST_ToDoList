@@ -1,0 +1,19 @@
+﻿@section Scripts {
+    <script src="~/js/Pages/Task/CreateTask.js"></script>
+}    
+
+<form id="taskForm">
+    <label for="Title">Título:</label>
+    <input type="text" name="Title" id="Title">
+    <br>
+    <label for="Description">Descripción:</label>
+    <input type="text" name="Description" id="Description">
+    <br>
+    <label for="IsCompleted">Tarea Completada:</label>
+    <input type="checkbox" value="true" name="IsCompleted" id="IsCompleted">
+    <br>
+    <label for="CompletedAt">Se completó (Opcional):</label>
+    <input type="datetime-local" name="CompletedAt" id="CompletedAt">
+    <br>
+    <button id="createTask" type="submit">Enviar</button>
+</form>

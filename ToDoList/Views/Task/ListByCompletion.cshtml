@@ -1,0 +1,55 @@
+﻿@model List<TaskModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Task List</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Registered At</th>
+                <th>Is Completed</th>
+                <th>Completed At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.Id</td>
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.RegisteredAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>@(task.IsCompleted ? "Yes" : "No")</td>
+                    <td>@(task.CompletedAt.HasValue ? task.CompletedAt.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Tareas Por Hacer";
+}
+
+@section Scripts{
+
+    <script src="~/js/Pages/Home.js"></script>
+}
+
+<div class="text-center">
+    <h1 class="display-4 pokemon">Tareas por Hacer</h1>
+    <p>Andrés Castro N</p>
+
+
+    <form action="@Url.Action("Create", "Task")" method="get">
+        <button type="submit">Crear Tarea</button>
+    </form>
+
+    <form method="post" action="@Url.Action("List", "Task")">
+        <button type="submit">Todas las Tareas</button>
+    </form>
+
+    <form method="post" action="@Url.Action("ListByCompletion", "Task")">
+        <input type="hidden" id="completionStatus" name="completionStatus" value="false" />
+        <button type="submit">Ver Incompletas</button>
+    </form>
+
+    <form method="post" action="@Url.Action("ListByCompletion", "Task")">
+        <input type="hidden" id="isCompleted" name="isCompleted" value="true" />
+        <button type="submit">Ver Completas</button>
+    </form>
+    <button id="completeBtn">Ver Completas AJAX</button>
+
+    <form method="post" action="@Url.Action("SearchTask", "Task")">
+        <label for="searchParam">Buscar por Titulo o Descripcion</label>
+        <input type="text" name="searchParam" id="searchParam" />
+        <button type="submit">Buscar</button>
+    </form>
+
+
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model ToDoList.Models.TaskModel
+
+@{
+    string formattedCompletedDate = Model.CompletedAt != null
+        ? Model.CompletedAt.Value.ToString("yyyy-MM-ddTHH:mm:ss")
+        : string.Empty;
+    string formattedRegisteredDate = Model.RegisteredAt.ToString("yyyy-MM-ddTHH:mm:ss");
+
+}
+@section Scripts {
+    <script src="~/js/Pages/Task/EditTask.js"></script>
+}    
+
+<script>
+    // Serialize the model to JSON
+    var modelJson = @Html.Raw(Json.Serialize(Model));
+
+    // Print the model to the console
+    console.log(modelJson);
+</script>
+
+<form id="editTaskForm">
+    <label for="Title">Título:</label>
+    <input type="text" value="@Model.Title" name="Title" id="Title">
+    <br>
+    <label for="Description">Descripción:</label>
+    <input type="text" value="@Model.Description"  name="Description" id="Description">
+    <br>
+    <label for="IsCompleted">Tarea Completada:</label>
+    <input type="checkbox" value="true" name="IsCompleted" id="IsCompleted" @(Model.IsCompleted ? "checked" : "") />
+    <br>
+    <label for="CompletedAt">Se completó (Opcional):</label>
+    <input type="datetime-local" value="@formattedCompletedDate" name="CompletedAt" id="CompletedAt">
+    <br>
+    <button id="editTask" type="submit">Enviar</button>
+    <input type="datetime-local" value="@formattedRegisteredDate" name="RegisteredAt" id="RegisteredAt" hidden>
+    <input type="number" value="@Model.Id" name="Id" id="Id" hidden>
+
+</form>

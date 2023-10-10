@@ -1,0 +1,64 @@
+﻿@model List<TaskModel>
+@section Scripts {
+    <script src="~/js/Pages/Task/ListTask.js"></script>
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Task List</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>DEscripción</th>
+                <th>Fecha Registro</th>
+                <th>Completa</th>
+                <th>Fecha Conclusión</th>
+                <th> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>@task.Id</td>
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.RegisteredAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@(task.IsCompleted ? "Yes" : "No")</td>
+                    <td>@(task.CompletedAt.HasValue ? task.CompletedAt.Value.ToString("yyyy-MM-dd HH:mm") : "Incompleta")</td>
+                    <td>
+                        <button class="deleteBtn" data-task-id="@task.Id">Borrar</button>
+                        <button class="editBtn" data-task-id="@task.Id">Modificar</button>
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+
+
