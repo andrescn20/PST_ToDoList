@@ -1,5 +1,7 @@
 ﻿@model List<TaskModel>
 @section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script src="~/js/Pages/Task/ListTask.js"></script>
 }
 
@@ -31,13 +33,12 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Registered At</th>
-                <th>Is Completed</th>
-                <th>Completed At</th>
-                <th> Actions</th>
-
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Fecha Registro</th>
+                <th>Completa</th>
+                <th>Fecha Conclusión</th>
+                <th> Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +49,7 @@
                     <td>@task.Title</td>
                     <td>@task.Description</td>
                     <td>@task.RegisteredAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    <td>@(task.IsCompleted ? "Yes" : "No")</td>
+                    <td>@(task.IsCompleted ? "Si" : "No")</td>
                     <td>
                         @if (task.CompletedAt.HasValue)
                         {
@@ -61,9 +62,8 @@
                         
                     </td>
                     <td>
-                        <button class="deleteBtn" data-task-id="@task.Id">Borrar</button>
-                        <button class="editBtn" data-task-id="@task.Id">Modificar</button>
-
+                        <button class="deleteBtn btn-danger w-100 mb-1" data-task-id="@task.Id">Borrar</button>
+                        <button class="editBtn btn-toolbar w-100" data-task-id="@task.Id">Modificar</button>
                     </td>
                 </tr>
             }
