@@ -19,7 +19,7 @@
                 });
             },
             cancelar: function () {
-                $.alert('Cancelado. La tarea no fue borrada');
+               
             },
         }
     });
@@ -48,11 +48,26 @@ $(".completeBtn").click(function () {
         url: '/Task/Complete/' + taskId,
         type: 'POST',
         success: function (result) {
-            alert(`Tarea #${taskId} completada con éxito`)
-            location.reload();
+            $.confirm({
+                title:`Operación Exitosa.`,
+                content: `Tarea #${taskId} se marcó como completa`,
+                buttons: {
+                    confirmar: function () {
+                        location.reload();
+                    },
+                }
+            });
         },
         error: function (xhr, status, error) {
             console.log(error)
+            $.confirm({
+                title: `Operación Fallida.`,
+                content: `Ocurrió un error. Intente de nuevo más tarde.`,
+                buttons: {
+                    confirmar: function () {
+                    },
+                }
+            });
         }
     });
 });

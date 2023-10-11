@@ -9,11 +9,30 @@
         data: taskData,
         success: function (data) {
             if (data == "Success") {
-                alert("Tarea Creada con exito")
-                location.reload();
-            }
+                    $.confirm({
+                        title: 'Operación Exitosa',
+                        content: `Nueva tareada creada. Indique si desea agregar otra o volver al inicio.`,
+                        buttons: {
+                            Agregar: function () {
+                                location.reload();
+                            },
+                            Volver: function () {
+                                location.href = '/'
+                            }
+
+                        }
+                    });
+                }
             else {
-                alert("Operación Fracasó")
+                $.confirm({
+                    title: 'Operación Fallida',
+                    content: `Por favor, revise los datos introducidos e intente de nuevo.`,
+                    buttons: {
+                        Aceptar: function () {
+                        },
+  
+                    }
+                });
             }
 
         },
