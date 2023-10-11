@@ -25,14 +25,14 @@
     </style>
 </head>
 <body>
-    <h2>Task List</h2>
+    <h2>Todas las Tareas</h2>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Título</th>
-                <th>DEscripción</th>
+                <th>Descripción</th>
                 <th>Fecha Registro</th>
                 <th>Completa</th>
                 <th>Fecha Conclusión</th>
@@ -48,7 +48,16 @@
                     <td>@task.Description</td>
                     <td>@task.RegisteredAt.ToString("yyyy-MM-dd HH:mm")</td>
                     <td>@(task.IsCompleted ? "Yes" : "No")</td>
-                    <td>@(task.CompletedAt.HasValue ? task.CompletedAt.Value.ToString("yyyy-MM-dd HH:mm") : "Incompleta")</td>
+                    <td>
+                        @if (task.CompletedAt.HasValue)
+                        {
+                                @task.CompletedAt.Value.ToString("yyyy-MM-dd HH:mm")
+                        }
+                        else
+                        {
+                            <button type="button" data-task-id="@task.Id" class="completeBtn btn btn-primary">Completar</button>
+                        }
+                    </td>
                     <td>
                         <button class="deleteBtn" data-task-id="@task.Id">Borrar</button>
                         <button class="editBtn" data-task-id="@task.Id">Modificar</button>

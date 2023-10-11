@@ -1,4 +1,7 @@
 ﻿@model List<TaskModel>
+@section Scripts {
+    <script src="~/js/Pages/Task/ListTask.js"></script>
+}
 
 <!DOCTYPE html>
 <html>
@@ -33,6 +36,8 @@
                 <th>Registered At</th>
                 <th>Is Completed</th>
                 <th>Completed At</th>
+                <th> Actions</th>
+
             </tr>
         </thead>
         <tbody>
@@ -44,7 +49,22 @@
                     <td>@task.Description</td>
                     <td>@task.RegisteredAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
                     <td>@(task.IsCompleted ? "Yes" : "No")</td>
-                    <td>@(task.CompletedAt.HasValue ? task.CompletedAt.Value.ToString("yyyy-MM-dd HH:mm:ss") : "")</td>
+                    <td>
+                        @if (task.CompletedAt.HasValue)
+                        {
+                            @task.CompletedAt.Value.ToString("yyyy-MM-dd HH:mm")
+                        }
+                        else
+                        {
+                            <button type="button" data-task-id="@task.Id" class="completeBtn btn btn-primary">Completar</button>
+                        }
+                        
+                    </td>
+                    <td>
+                        <button class="deleteBtn" data-task-id="@task.Id">Borrar</button>
+                        <button class="editBtn" data-task-id="@task.Id">Modificar</button>
+
+                    </td>
                 </tr>
             }
         </tbody>

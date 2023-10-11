@@ -222,6 +222,40 @@ namespace ToDoList
             }
 
         }
+        public string CompleteTask(string id)
+        {
+            try
+            {
+                connection.Open();
+                DateTime completedDate = DateTime.Now;
+
+                string insertQuery = "UPDATE Tasks SET isCompleted = @IsCompleted, completedAt = @completedAt WHERE id = @Id;";
+
+                using (SqlCommand command = new SqlCommand(insertQuery, connection))
+                {
+
+
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@IsCompleted", true);
+                    command.Parameters.AddWithValue("@CompletedAt", completedDate);
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        return "Success";
+                    }
+                    else
+                    {
+                        return "failed";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "An error occurred: " + ex.Message;
+            }
+
+        }
         public TaskModel RetrieveById(string id)
         {
             TaskModel task = null;
@@ -257,6 +291,7 @@ namespace ToDoList
 
         public string EditTask(TaskModel task)
         {
+
             try
             {
                 connection.Open();
@@ -276,7 +311,7 @@ namespace ToDoList
                     command.Parameters.AddWithValue("@Description", task.Description);
                     command.Parameters.AddWithValue("@RegisteredAt", task.RegisteredAt);
                     command.Parameters.AddWithValue("@IsCompleted", task.IsCompleted);
-                    if (task.CompletedAt == null)
+                    if (task.CompletedAt == null || !task.IsCompleted)
                     {
                         command.Parameters.AddWithValue("@CompletedAt", DBNull.Value);
                     }
@@ -290,7 +325,6 @@ namespace ToDoList
 
                     if (rowsAffected > 0)
                     {
-                        
                         return "Success";
                     }
                     else

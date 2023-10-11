@@ -1,15 +1,19 @@
 ﻿$("#editTask").click(function (e) {
     e.preventDefault()
     let taskData = $("#editTaskForm").serialize()
-    console.log(taskData)
     $.ajax({
 
         url: "/Task/EditTask",
         type: "POST",
         data: taskData,
         success: function (data) {
-            console.log(data)
-
+            if (data == "Success") {
+                alert("Tarea Actualizada con exito")
+                window.location.href = '/Task/List'
+            }
+            else {
+                alert("Operación Fracasó")
+            }
         },
         error: function (error) {
             console.error(error);

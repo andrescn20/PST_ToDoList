@@ -8,11 +8,17 @@
         type: "POST",
         data: taskData,
         success: function (data) {
-            console.log(data)
+            if (data == "Success") {
+                alert("Tarea Creada con exito")
+                location.reload();
+            }
+            else {
+                alert("Operación Fracasó")
+            }
 
         },
         error: function (error) {
-            console.error(error);
+            alert(error)
         }
     });
 });

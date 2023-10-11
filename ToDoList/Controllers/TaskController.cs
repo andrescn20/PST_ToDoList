@@ -86,6 +86,12 @@ namespace MVCEjemplo.Controllers
             return editTask;
         }
 
+        public string Complete(string id)
+        {
+            DBService DB = new();
+            string task = DB.CompleteTask(id);
+            return task;
+        }
     }
 
 }
